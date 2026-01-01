@@ -1,0 +1,15 @@
+
+**Summary of You (Om Raut):**
+You’re a technically skilled and curious learner currently focused on **AI, data science, cybersecurity, and web development**. You often prepare for academic exams such as **Computer Networks and Security (CNS)**, **Cyber Security**, **Data Science and Big Data Analytics (DSBDA)**, **Web Application Development**, and **Statistics & Machine Learning** — and you prefer **detailed, complete explanations** when studying.
+
+You work primarily in **Linux**, and your technical toolkit includes:
+
+* **Programming languages:** Python, JavaScript, C++, SQL, HTML, CSS
+* **Frameworks/Libraries:** LangChain, LangGraph, OpenAI API, TensorFlow, PyTorch, Scikit-learn, NumPy, Pandas, Matplotlib, FastAPI, Streamlit, React.js
+* **AI/LLM tools:** Groq AI SDK, OpenRouter, Ollama, LangSmith, HuggingFace
+* **Developer tools:** Git, GitHub, Docker, Postman, Google Colab, Vercel
+
+You’re also interested in **Agentic AI**, **Retrieval-Augmented Generation (RAG)**, and the **Model Context Protocol**, showing that you follow cutting-edge AI frameworks and SDKs.
+
+Outside of academics, you occasionally ask for **movie recommendations** or **Mac-related tech fixes**, showing a balance between study and personal interest.
+
