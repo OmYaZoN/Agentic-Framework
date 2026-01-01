@@ -10,7 +10,7 @@ import uuid
 from datetime import datetime
 from typing import Annotated, Any, Dict, List, Optional
 from typing_extensions import TypedDict
-
+import os
 from dotenv import load_dotenv
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
@@ -36,6 +36,7 @@ class State(TypedDict):
     feedback_on_work: Optional[str]
     success_criteria_met: bool
     user_input_needed: bool
+    step_count: int
 
 
 class EvaluatorOutput(BaseModel):
@@ -77,11 +78,19 @@ class Sidekick:
         self.tools += await other_tools()
 
         # Initialize worker LLM with tools
-        worker_llm = ChatOpenAI(model="gpt-4o-mini")
+        worker_llm = ChatOpenAI(
+            model="openai/gpt-oss-120b:free",
+            base_url="https://openrouter.ai/api/v1",
+            api_key=os.getenv("OPENROUTER_API_KEY"),
+        )
         self.worker_llm_with_tools = worker_llm.bind_tools(self.tools)
 
         # Initialize evaluator LLM with structured output
-        evaluator_llm = ChatOpenAI(model="gpt-4o-mini")
+        evaluator_llm = ChatOpenAI(
+            model="openai/gpt-oss-120b:free",
+            base_url="https://openrouter.ai/api/v1",
+            api_key=os.getenv("OPENROUTER_API_KEY"),
+        )
         self.evaluator_llm_with_output = evaluator_llm.with_structured_output(
             EvaluatorOutput
         )
@@ -181,7 +190,8 @@ class Sidekick:
     def evaluator(self, state: State) -> State:
         """
         Evaluator node that assesses whether the task has been completed successfully.
-        
+        You are an evaluator.
+
         Args:
             state: Current state of the workflow.
             
@@ -190,9 +200,25 @@ class Sidekick:
         """
         last_response = state["messages"][-1].content
 
+        
+
+
         system_message = """You are an evaluator that determines if a task has been completed successfully by an Assistant.
         Assess the Assistant's last response based on the given criteria. Respond with your feedback, and with your decision on whether the success criteria has been met,
         and whether more input is needed from the user.
+
+        You MUST respond ONLY with valid JSON.
+            NO markdown.
+            NO explanations.
+            NO extra text.
+
+            Return EXACTLY this JSON schema:
+
+            {
+                "feedback": "string",
+                "success_criteria_met": true or false,
+                "user_input_needed": true or false
+            }
         """
 
         user_message = f"""You are evaluating a conversation between the User and Assistant. You decide what action to take based on the last response from the Assistant.
@@ -222,17 +248,26 @@ class Sidekick:
             HumanMessage(content=user_message),
         ]
 
-        eval_result = self.evaluator_llm_with_output.invoke(evaluator_messages)
+        try:
+            eval_result = self.evaluator_llm_with_output.invoke(evaluator_messages)
+        except Exception as e:
+            # Defensive fallback to prevent graph crash
+            eval_result = EvaluatorOutput(
+                feedback="Evaluator failed to produce valid JSON output.",
+                success_criteria_met=False,
+                user_input_needed=True,
+            )
+
+        step_count = state.get("step_count", 0) + 1
+
         new_state = {
             "messages": [
-                {
-                    "role": "assistant",
-                    "content": f"Evaluator Feedback on this answer: {eval_result.feedback}",
-                }
+                AIMessage(content=f"Evaluator Feedback: {eval_result.feedback}")
             ],
             "feedback_on_work": eval_result.feedback,
             "success_criteria_met": eval_result.success_criteria_met,
             "user_input_needed": eval_result.user_input_needed,
+            "step_count": step_count, 
         }
         return new_state
 
@@ -246,6 +281,9 @@ class Sidekick:
         Returns:
             str: Next node name ("worker" or "END").
         """
+        if state["step_count"] >= 5:
+            return "END"
+
         if state["success_criteria_met"] or state["user_input_needed"]:
             return "END"
         else:
@@ -293,17 +331,22 @@ class Sidekick:
         config = {"configurable": {"thread_id": self.sidekick_id}}
 
         state = {
-            "messages": message,
+            "messages": [HumanMessage(content=message)],
             "success_criteria": success_criteria or "The answer should be clear and accurate",
             "feedback_on_work": None,
             "success_criteria_met": False,
             "user_input_needed": False,
+            "step_count": 0,
         }
         result = await self.graph.ainvoke(state, config=config)
         
         user = {"role": "user", "content": message}
-        reply = {"role": "assistant", "content": result["messages"][-2].content}
-        feedback = {"role": "assistant", "content": result["messages"][-1].content}
+        assistant_msgs = [
+            m for m in result["messages"] if isinstance(m, AIMessage)
+        ]
+
+        reply = {"role": "assistant", "content": assistant_msgs[-2].content}
+        feedback = {"role": "assistant", "content": assistant_msgs[-1].content}
         
         return history + [user, reply, feedback]
 

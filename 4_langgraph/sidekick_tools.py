@@ -2,7 +2,7 @@
 Tool definitions for the Sidekick agent.
 
 This module provides various tools including browser automation, file management,
-web search, Wikipedia queries, Python REPL, and push notifications.
+web search, Wikipedia queries, Python REPL, and push notifications via ntfy.
 """
 
 import os
@@ -26,10 +26,9 @@ from langchain_experimental.tools import PythonREPLTool
 
 load_dotenv(override=True)
 
-# Pushover notification configuration
-pushover_token = os.getenv("PUSHOVER_TOKEN")
-pushover_user = os.getenv("PUSHOVER_USER")
-pushover_url = "https://api.pushover.net/1/messages.json"
+# ntfy notification configuration
+ntfy_topic = os.getenv("NTFY_TOPIC")
+ntfy_server = os.getenv("NTFY_SERVER", "https://ntfy.sh")  # Default to public ntfy.sh
 
 # Initialize search API wrapper
 serper = GoogleSerperAPIWrapper()
@@ -59,7 +58,7 @@ async def playwright_tools():
 
 def push(text: str) -> str:
     """
-    Send a push notification to the user via Pushover.
+    Send a push notification to the user via ntfy.
     
     Args:
         text: The message text to send.
@@ -67,12 +66,15 @@ def push(text: str) -> str:
     Returns:
         str: "success" if the notification was sent.
     """
+    if not ntfy_topic:
+        return "error: NTFY_TOPIC not configured"
+    
+    ntfy_url = f"{ntfy_server}/{ntfy_topic}"
     requests.post(
-        pushover_url,
-        data={
-            "token": pushover_token,
-            "user": pushover_user,
-            "message": text
+        ntfy_url,
+        data=text.encode('utf-8'),
+        headers={
+            "Content-Type": "text/plain"
         }
     )
     return "success"

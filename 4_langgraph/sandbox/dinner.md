@@ -1,24 +1,57 @@
-# Dinner Report: Le Bernardin
+# Seafood Dinner Options in Bhosari, Pune
 
-## Restaurant Overview
-- **Name**: Le Bernardin
-- **Address**: 155 W 51st St, New York, NY 10019
-- **Phone**: (212) 554-1515
-- **Website**: [le-bernardin.com](http://le-bernardin.com)
+## 1. Golden Fish Restaurant
 
-## Cuisine
-Le Bernardin specializes in refined seafood dishes, crafted with the utmost respect for the ingredients. The menu includes a variety of seafood preparations, with an emphasis on freshness and simplicity.
+- **Address:** Shop 15 & 16, Privia Square, Nageshwar Nagar, Sector 6, Opposite Spine City Mall, Moshi, Bhosari, Pune, Maharashtra 411028
+- **Phone:** +91 9922007678
+- **Average Cost for Two:** ₹950 (approx.)
+- **Cuisines:** Seafood, Maharashtrian
 
-## Menu Highlights
-- **Tuna Tartare**: Diced raw tuna, served with toasted sesame and avocado.
-- **Wild Salmon**: Lightly cooked, served with a warm ginger-soy emulsion and bok choy.
-- **Poached Lobster**: Accompanied by truffle butter and a delicate sauce.
-- **Chocolate Soufflé**: A classic dessert, rich and airy.
+### Menu Highlights
+| Category | Dish | Description |
+|----------|------|-------------|
+| Starters | Fish Lollipop | Deep‑fried fish bite coated in a crunchy batter.
+|          | Surmai Fry | Fresh kingfish (surmai) fried to a golden crisp.
+|          | Pomfret Fry | Whole pomfret fried with aromatic spices.
+|          | Bangda Fry | Bombay duck (bangda) lightly fried, a local favorite.
+|          | Bombil Fry | Bombay duck strips, crispy and tangy.
+| Mains    | Chicken Dry | Spicy dry chicken, a good non‑seafood option.
+|          | (Various fish thalis) | Typically includes a mix of fried, grilled, and curry preparations of local catch.
+| Beverages| Soft drinks, fresh juices |
+| Desserts | (Not listed) – usually seasonal Indian sweets |
 
-## Ambiance
-The atmosphere at Le Bernardin is elegant and serene, characterized by minimalist decor and a focus on the dining experience.
+### Reviews (Summary)
+- **Rating:** 4.1 / 5 (based on 16 dining reviews)
+- **Positive:** Fresh, high‑quality seafood; friendly staff; clean ambience.
+- **Negative:** Some guests find the prices a bit high and occasional service delays.
+- **Typical Comment:** “Great taste with authentic coastal flavors. Must‑visit for seafood lovers in PCMC.”
 
-## Summary of Reviews
-Le Bernardin has consistently received rave reviews for its exceptional cuisine and impeccable service. It is a three-Michelin star restaurant, recognized as one of the best seafood restaurants not only in New York but also in the world. Diners emphasize the harmonious flavors and the artistry of the dishes, making it a top choice for special occasions.
+---
 
-**In conclusion**, Le Bernardin represents the pinnacle of fine dining, offering diners an unforgettable experience centered around seafood excellence.
+## 2. Kinara Special Fish & Snacks
+
+- **Address:** Gokul Colony, Krishna Nagar, Bhosari, Pune, Maharashtra 411028
+- **Phone:** +91 9822597914
+- **Average Cost for Two:** ₹300 (budget‑friendly)
+- **Cuisines:** Seafood, Maharashtrian, North Indian, Street Food
+
+### Menu Highlights
+| Category | Dish | Description |
+|----------|------|-------------|
+| Starters | Fish Thali Special | A platter with fried fish, rice, dal, and pickles.
+|          | Khekada Fry | Deep‑fried fish cutlets served with chutney.
+|          | (Various snacks) | Includes local seafood snacks like bombil fry and prawn fry.
+| Mains    | (Daily specials) – often includes grilled or curry‑style fish dishes.
+| Beverages| Soft drinks, traditional Indian drinks |
+| Desserts | (Typically seasonal Indian sweets) |
+
+### Reviews (Summary)
+- **Rating:** Around 3.5 / 5 (based on Zomato reviews)
+- **Positive:** Very affordable, authentic Konkan flavors, quick service.
+- **Negative:** Basic ambience, occasional crowd during peak hours.
+- **Typical Comment:** “Best budget seafood spot in Bhosari. The fish thali is generous and tasty.”
+
+---
+
+## Recommendation
+If you’re looking for a **more upscale experience** with a wider variety and are okay with a higher price, **Golden Fish Restaurant** is the top pick. For a **budget‑friendly, authentic local flavor**, try **Kinara Special Fish & Snacks**.
